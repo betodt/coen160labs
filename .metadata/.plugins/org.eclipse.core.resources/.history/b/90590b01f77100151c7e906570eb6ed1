@@ -1,0 +1,40 @@
+package edu.scu.coen160.lab3;
+
+class PowerUser {
+	public void powerDown() {
+		System.out.println("Powering " + this + " down!");
+	}
+}
+class EmergencyLight extends PowerUser {}
+class Computer extends PowerUser {}
+class TV extends PowerUser {}
+
+class BuildingManager {
+	PowerUser things[] = new PowerUser[24];
+	int numItems = 0;
+
+	public void powerDownAtNight( ) {
+		for (int i=0; i<things.length; i++)
+			things[i].powerDown();
+	}
+
+	/** Add an PowerUser to this building */
+	public void add(PowerUser thing) {
+	
+		things[numItems] = thing;
+	}
+
+}
+public class Lab3_Q2 {
+	public static void q2() {
+		BuildingManager b1 = new BuildingManager( );
+	
+		b1.add(new EmergencyLight()); 
+
+		b1.add(new Computer());
+	
+		b1.add(new TV());
+
+		b1.powerDownAtNight( );
+	}
+}

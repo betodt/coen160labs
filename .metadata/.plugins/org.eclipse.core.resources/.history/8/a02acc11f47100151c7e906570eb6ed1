@@ -1,0 +1,112 @@
+package edu.scu.coen160.lab3;
+
+/**
+ * @(#)Stack.java
+ */
+class Array {
+	
+	private int [] itemList;
+	private int maxLength = 10;
+	
+	public Array(int length){
+		maxLength = length;
+		itemList = new int[maxLength];
+	}
+	public Array(){
+		itemList = new int[maxLength];
+	}
+	public void add(int index, int element){
+		if (index < maxLength && index >= 0){
+			itemList[index] = element;
+		}
+	}
+	public int at(int index) throws Exception{
+		if (index < maxLength && index >= 0){
+			return itemList[index];
+		}
+		else {
+			throw new Exception ("Invalid index");
+		}
+	}
+	public void show()
+	{
+		for (int i = 0; i < itemList.length; ++i)
+			System.out.print (itemList[i] +" ");
+		System.out.println ();
+	}	
+}
+
+class Stack {
+	private Array a;
+	private int top;
+	
+	public Stack() {
+		a = new Array();
+		top = 0;
+	}
+	
+	public Stack(int length) {
+		a = new Array(length);
+		top = 0;
+	}
+	
+	public void push(int item) {
+		//if stack is empty, set it 
+		if(top == -1)
+			top = 0;
+			
+		a.add(top, item);
+		top++;
+	}
+
+	public void pop() {
+		try {
+			int popped = a.at(top-1);
+			
+			top--;
+			
+			System.out.print(popped);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void showStack() {
+		// Show the elements in the order of LIFO	
+		if(top == -1) 
+			System.out.println("Stack Empty!");
+		
+		int i = 0;
+		while (i < top) {
+			try {
+				System.out.print(a.at(i));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		System.out.println();
+	}
+		
+}
+
+public class Lab3_Q1{
+	
+	public static void q1(){
+		Stack myStack = new Stack(30);
+		
+		myStack.push(10);
+		myStack.push(20);
+		myStack.push(30);
+		myStack.push(40);
+		
+		System.out.println(myStack.pop());
+		
+		myStack.showStack();
+		
+	}
+	
+}

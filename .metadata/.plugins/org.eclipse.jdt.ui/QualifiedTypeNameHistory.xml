@@ -3,6 +3,11 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="edu.scu.coen160.lab3.Stack"/>
 <fullyQualifiedTypeName name="edu.scu.coen160.lab3.Array"/>
+<fullyQualifiedTypeName name="edu.scu.coen160.lab4.Lab4"/>
+<fullyQualifiedTypeName name="java.lang.Error"/>
+<fullyQualifiedTypeName name="java.lang.Boolean"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.util.regex.Pattern"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

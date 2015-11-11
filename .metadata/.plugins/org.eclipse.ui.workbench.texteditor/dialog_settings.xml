@@ -2,26 +2,30 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Laptop" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="Computer"/>
-			<item value="&#x09;&#x09;Computer c1 = new Computer();"/>
-			<item value="Laptop"/>
-			<item value="computer"/>
-			<item value="boxno"/>
-			<item value="Asset"/>
-			<item value="CheckThings"/>
+			<item value="addBar"/>
+			<item value="readData"/>
+			<item value="DataManager"/>
+			<item value="Data"/>
+			<item value="sales"/>
+			<item value="BarChart"/>
+			<item value="hello world"/>
+			<item value="showButton"/>
 		</list>
 		<list key="replacehistory">
+			<item value="buttonPanel"/>
+			<item value="outputPanel"/>
+			<item value="inputPanel"/>
+			<item value="panel"/>
+			<item value="contentPane"/>
 			<item value="Laptop"/>
 			<item value="Computer"/>
 			<item value="computer"/>
-			<item value="PowerUser"/>
-			<item value="checker"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

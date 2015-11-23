@@ -1,5 +1,0 @@
-package edu.scu.coen160.lab3;
-
-public interface Lockable {
-
-}

@@ -1,0 +1,149 @@
+package lab8;
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+
+import java.util.*;
+class WaterTank extends Observable{
+	
+	final int CAPACITY = 1000;	
+    int currentVolume = 0;  
+    boolean shutOff = false;
+    final int ADDED_VOLUME_PER_STEP = 800;
+
+    WaterTank(int c){currentVolume = c;}
+    WaterTank(){}
+
+    public void flowIn(int addedVolume){     		
+      		if (currentVolume+addedVolume < CAPACITY){
+      			currentVolume += addedVolume;
+      			open();		
+      		}
+      		//System.out.println(currentVolume);
+    }
+    public void flowIn(){     		
+  		if (currentVolume+ADDED_VOLUME_PER_STEP < CAPACITY){
+  			currentVolume += ADDED_VOLUME_PER_STEP;
+  			open();		
+  		}
+    }
+     public void flowOut(){
+    	 if (!shutOff){
+      		currentVolume -= 30;
+      		
+      		// Volume changed. Therefore notify the observers
+      		
+      		setChanged();
+  			notifyObservers();
+    	 }
+     }
+     public void open(){
+    	 shutOff = false;
+     }
+     public void setShutOff(boolean flag) {shutOff = flag;}
+     public int getCurrentVolume() { return currentVolume;}
+    
+}  
+
+class LevelMonitor implements Observer{    
+
+    final int CRITICAL_LEVEL;
+    
+    WaterTank tank; // this is the Observable object that should be observed
+	
+    public LevelMonitor (int level,WaterTank t){
+        this.CRITICAL_LEVEL = level;
+        tank = t;  
+        // add this as the observer on tank
+        tank.addObserver(this);
+        
+        if (tank.getCurrentVolume() > CRITICAL_LEVEL){
+        	tank.open();
+        }
+    }
+    public LevelMonitor(){this.CRITICAL_LEVEL = 10;}
+
+    
+    public void update(Observable o,Object t){
+    	
+       int volume = tank.getCurrentVolume();
+       if (volume <= CRITICAL_LEVEL){
+    	   System.out.print("CRITICAL: "+volume);
+    	   System.out.println(" Shutting off WaterTank");
+    	   
+    	   tank.setShutOff(true);
+       }
+       else
+    	   System.out.println("Levels OK: "+volume);
+    }     
+}
+
+//////////////////////////////////////////////////
+
+public class WTSim2 extends JFrame implements ActionListener, Observer{
+
+	JButton flowIn, flowOut;
+	JLabel message;
+	
+	WaterTank tank = new WaterTank(200);		
+	LevelMonitor monitor = new LevelMonitor(50,tank);
+	
+	public WTSim2(){
+		// Set the title to "WTSim2"
+		setTitle("WTSim2");
+		
+		// Create the buttons with labels as shown in the figure.
+		flowIn = new JButton("FLOW-IN");
+		flowOut = new JButton("FLOW-OUT");
+		message = new JLabel();
+		
+		// Set the actioncommands to "in" and "out"
+		// on the buttons respectively
+		flowIn.setActionCommand("in");
+		flowOut.setActionCommand("out");
+		
+		Container contentPane = getContentPane();
+	    contentPane.setLayout( new FlowLayout() );
+		
+	    // Add the buttons
+	   contentPane.add(flowIn);
+	   contentPane.add(flowOut);
+	    
+	    // Add the actionListener as "this" on both buttons
+	    flowIn.addActionListener(this);
+	    flowOut.addActionListener(this);
+	    
+		this.setSize(400,200);
+    	setLocationRelativeTo(null);
+	    setVisible(true);
+	    
+		
+	}
+	public void actionPerformed(ActionEvent e){
+		
+		// If actionCommand is "in", you must call 
+		// tank.flowIn.
+		
+		if (e.getActionCommand().equals("in")){
+			tank.flowIn();
+		}
+		// If actionCommand is "out", you must call 
+				// tank.flowOut.
+		if (e.getActionCommand().equals("out")){
+			tank.flowOut();
+		}
+		
+	}
+	public static void main(String[] args) {
+		new WTSim2();
+	
+	}
+	
+	public void update(Observable o, Object arg) {
+		
+		
+	}
+
+}
